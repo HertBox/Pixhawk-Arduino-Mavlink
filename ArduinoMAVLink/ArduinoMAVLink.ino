@@ -11,16 +11,14 @@ void setup() {
 }
 
 void loop() {
-  // Define the system type (see mavlink_types.h for list of possible types)
-  int compid = MAV_COMP_ID_IMU;     ///< The component sending the message is the IMU, it could be also a Linux process
-  uint8_t system_type = MAV_QUADROTOR;
-  uint8_t autopilot_type = MAV_AUTOPILOT_PIXHAWK;
-  // Initialize the required buffers
   mavlink_message_t msg;
-  uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+  uint8_t buf[MAVLINK_MAX_PACKET_LEN];// Define the system type (see mavlink_types.h for list of possible types)
+  int compid = MAV_COMP_ID_IMU;     ///< The component sending the message is the IMU, it could be also a Linux process
+  uint8_t autopilot_type = MAV_AUTOPILOT_PIXHAWK; 
+  // Initialize the required buffers
   // Pack the message
-  // mavlink_message_heartbeat_pack(system id, component id, message container, system type, MAV_AUTOPILOT_GENERIC)
-  mavlink_msg_heartbeat_pack(1, compid, &msg, system_type, autopilot_type);
+  // mavlink_message_heartbeat_pack(system id, component id(MAV_COMPONENT), message container, system type(MAV_TYPE), MAV_AUTOPILOT_GENERIC)
+  mavlink_msg_heartbeat_pack(1, 0, &msg, 18, 0);
   // Copy the message to send buffer
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   /* The default UART header for your MCU */
@@ -53,8 +51,24 @@ void loop() {
         Serial.println("Msg Id: ");
         Serial.println(msg.msgid);
       }
-
-      Serial.println(" ");
+//      switch (msg.msgid)
+//            {
+//                case 0x26:
+//                {
+//                  //  mavlink_sacled_imu_t imu;
+//                  mavlink_msg_highres_imu_decode(&msg, &imu);
+// 
+//                    printf("Got message HIGHRES_IMU");
+//                   // printf("\t time: %llu\n", imu.time_usec);
+//                   Serial.println(imu.xacc);
+//                   Serial.println(imu.yacc);
+//                   Serial.println(imu.zacc);
+//                   
+//                }
+//                break;
+// 
+//            }
+          
       // And get the next one
 
     }
