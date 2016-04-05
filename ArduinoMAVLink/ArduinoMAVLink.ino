@@ -1,9 +1,6 @@
-// Arduino MAVLink test code.
 
-//#include <FastSerial.h>
 #include "C:/Users/luis.Valtierra/Documents/ardupilot/libraries/mavlink/include/mavlink.h"         // Mavlink interface
 
-// FastSerialPort0(Serial);
 
 void setup() {
   Serial1.begin(57600); //RXTX from Pixhawk (Port 18,19 Arduino Mega)
