@@ -20,10 +20,12 @@ void setup()
 }
 void loop()
 {
-  while (Serial1.available() > 1 ) 
+  while (Serial1.available() > 0 ) 
   {
-    Serial.print("Num Bytes: ");
-    Serial.println(Serial1.available());
+    uint8_t c = Serial1.read();
+   Serial.println(c);
+   // Serial.print("Num Bytes: ");
+  //  Serial.println(Serial1.available());
   }
  
   Serial.println("Not yet");
