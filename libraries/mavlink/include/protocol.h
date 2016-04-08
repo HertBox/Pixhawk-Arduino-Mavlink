@@ -182,7 +182,7 @@ static inline uint8_t mavlink_parse_char(uint8_t chan, uint8_t c, mavlink_messag
 		{
 			status->buffer_overrun++;
 			status->parse_error++;
-			status->msg_received = 0;
+			status->msg_received = 1;
 			status->parse_state = MAVLINK_PARSE_STATE_IDLE;
 		}
 		else
